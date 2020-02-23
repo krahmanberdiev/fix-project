@@ -5,6 +5,7 @@ class Status extends Component {
 
     changeStatus(ind) {
         const theStatus=this.props.data;
+        console.log(theStatus)
         if (theStatus[ind].status==='Active') {
             theStatus[ind].status='Progress'
         } else if(theStatus[ind].status==='Progress') {
@@ -13,7 +14,7 @@ class Status extends Component {
             theStatus[ind].status='Active'
         }
         this.setState({[this.props.data]: theStatus})
-}
+      }
     
     render() {
         return (
@@ -21,7 +22,7 @@ class Status extends Component {
                 <div  className='header'>Status</div> 
                 {this.props.data.map((card, ind) => {
                     return (
-                        <div className={'card'+' '+this.props.data[ind].status.toLowerCase()} key={String(ind)} onClick = {()=>this.changeStatus(ind)}>
+                        <div className={'card'+' ' + this.props.data[ind].status.toLowerCase()} key={String(ind)} onClick = {()=>this.changeStatus(ind)}>
                             <button>{card.status}</button>
                         </div>
                     )

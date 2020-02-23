@@ -3,13 +3,6 @@ import '../App.css';
 
 class Action extends Component {
 
-    deleteItems(ind) {
-            const theItem = this.props.data;
-            theItem.splice([ind], 1);
-            console.log(theItem)
-            this.setState({[this.props.data]: theItem})
-        }
-
     render() {
         return (
             <div className='action col'>
@@ -19,7 +12,7 @@ class Action extends Component {
                             <div className='card' key={String(ind)}>
                                 {card.action}
                                 <i class="fas fa-pen"></i>
-                                <i class="fas fa-trash-alt" onClick = {() => this.deleteItems(ind)}></i>
+                                <i class="fas fa-trash-alt" onClick = {() => this.props.deleteItems(ind)}></i>
                             </div>
                         )
                     })}
