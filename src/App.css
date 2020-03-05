@@ -38,13 +38,15 @@ body {
 
 .buttons {
   background-color: #37a0f4;
-  padding: 7px 30px;
+  padding: 7px 0;
   width: 100px;
   border-radius: 3px;
+  text-align: center;
 }
 
 .progress {
   background-color: orange;
+  text-align: center;
 }
 
 .inactive {

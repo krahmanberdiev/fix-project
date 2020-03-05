@@ -19,7 +19,7 @@ const AddNewCustomerForm = ({ onInputChange, cancelButton, addingUser}) => {
               </div>
               <div className="add-cancel-row">
                   <button id="add" type="button" onClick={addingUser}> Add</button>
-                  <button id="cancel" type="button" onClick={() => cancelButton('1')}> Cancel</button>
+                  <button id="cancel" type="button" onClick={() => cancelButton('home')}> Cancel</button>
               </div>            
           </div>
       </div>

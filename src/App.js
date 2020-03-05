@@ -5,6 +5,7 @@ import AddNewCustomerButton from './components/AddNewCustomer/AddNewCustomerButt
 import AddNewCustomerForm from './components/AddNewCustomer/AddNewCustomerForm.js';
 import Pagination from './components/Pagination/Pagination.js';
 import Header from './components/Header/Header.js';
+import SignIn from './components/SignIn/SignIn.js'; 
 
 class App extends Component {
   constructor() {
@@ -19,7 +20,7 @@ class App extends Component {
         {id: 6, name: 'Zamir', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
         {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' }
       ],
-      route: '1',
+      route: 'home',
       newform: {}
     }
   }
@@ -35,14 +36,14 @@ onInputChange = ( {target} ) => {
 }
 
 addingUser = () => {
-  const theUserList = this.state.data;
-  const newUser = this.state.newform;
-  if (newUser.name.length !== 0) {
-      newUser.status = 'Active'
-      newUser.action = ''
-  theUserList.push(newUser);
-  }
-  this.setState({route: '1'})
+  // const theUserList = this.state.data;
+  // const newUser = this.state.newform;
+  // if (newUser.name.length !== 0) {
+  //     newUser.status = 'Active'
+  //     newUser.action = ''
+  // theUserList.push(newUser);
+  // }
+  this.setState({route: 'home'})
 }
 
 //cancel adding new customer
@@ -78,7 +79,7 @@ onStatusChange = (ind) => {
 render() {
   return (  
     <div className='App'>
-    {this.state.route === '2'
+    {this.state.route === 'newuser'
      ? <AddNewCustomerForm 
         customers = {this.state} 
         cancelButton={this.cancelButton} 
