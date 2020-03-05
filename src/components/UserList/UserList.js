@@ -39,7 +39,7 @@ render() {
                                 </button>
                             </div>  
                             <div>
-                                <i class="fas fa-pen" onClick={() => this.props.onEditUser('2')}></i>
+                                <i class="fas fa-pen" onClick={() => this.props.addNewCustomerButton('edituser', ind)}></i>
                                 <i class="fas fa-trash-alt" onClick={() => this.props.onDeleteUser(ind)}></i>
                             </div>
                         </div>

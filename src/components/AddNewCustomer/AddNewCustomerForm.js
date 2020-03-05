@@ -10,7 +10,7 @@ const AddNewCustomerForm = ({ onInputChange, cancelButton, addingUser}) => {
                   <div id="modal-header">New Customer</div>
               </div>
               <div>
-                  <input type="input" placeholder="Name" onChange={onInputChange} name='name' />
+                  <input type="input" placeholder="Name" onChange={onInputChange} name='name'/>
                   <input type="input" placeholder="Phone" onChange={onInputChange} name='phone'/>
               </div>
               <div>

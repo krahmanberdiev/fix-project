@@ -6,6 +6,7 @@ import AddNewCustomerForm from './components/AddNewCustomer/AddNewCustomerForm.j
 import Pagination from './components/Pagination/Pagination.js';
 import Header from './components/Header/Header.js';
 import SignIn from './components/SignIn/SignIn.js'; 
+import EditCustomerForm from './components/EditCustomer/EditCustomerForm.js'; 
 
 class App extends Component {
   constructor() {
@@ -21,29 +22,13 @@ class App extends Component {
         {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' }
       ],
       route: 'home',
-      newform: {}
+      newform: {},
+      currentIndex: ''
     }
   }
-
  //triggering add new customer form
-addNewCustomerButton = (route) => {
-  this.setState({route: route})
-}
-
-onInputChange = ( {target} ) => {
-  this.state.newform[target.name] = target.value;
-  console.log(this.state.newform)
-}
-
-addingUser = () => {
-  // const theUserList = this.state.data;
-  // const newUser = this.state.newform;
-  // if (newUser.name.length !== 0) {
-  //     newUser.status = 'Active'
-  //     newUser.action = ''
-  // theUserList.push(newUser);
-  // }
-  this.setState({route: 'home'})
+addNewCustomerButton = (route, ind) => {
+  this.setState({route: route, currentIndex: ind})
 }
 
 //cancel adding new customer
@@ -51,9 +36,45 @@ cancelButton = (route) => {
   this.setState({route: route})
 }
 
+onInputChange = ( {target} ) => {
+  const theform = this.state.newform;
+  theform[target.name] = target.value;
+  this.setState({newform: theform})
+  console.log(this.state.newform)
+}
+
+addingUser = () => {
+  const theUserList = this.state.data;
+  const newUser = this.state.newform;
+  if (Object.entries(newUser).length !== 0) {
+      newUser.status = 'Active'
+  theUserList.push(newUser);
+  }
+  this.setState({route: 'home', newform: {}})
+}
+
 //to edit the user info
 onEditUser = (ind) => {
-  console.log('hey')
+  // console.log(target)
+  const theUserList = this.state.data;
+  const theCurrentUser = this.state.data[ind]
+  console.log(theCurrentUser);
+
+  const theform = this.state.newform;
+  // theform[target.name] = target.value;
+
+  // const editedUser = this.state.data[ind]
+  if (Object.entries(theform).length !== 0) {
+    // theCurrentUser = 
+    for (let key of Object.keys(theform)) {
+      theCurrentUser[key] = theform[key];
+      console.log(theCurrentUser[key])
+      theUserList[ind] = theCurrentUser;
+      this.setState({data: theUserList})
+    }
+    theform.status = 'Active'
+  }
+  this.setState({ route: 'home', newform: {} })
 }
 
  //to delete the user  
@@ -86,12 +107,20 @@ render() {
         onInputChange={this.onInputChange}
         addingUser = {this.addingUser} />
      : <div></div> }
+      {this.state.route === 'edituser'
+     ? <EditCustomerForm 
+        customers = {this.state} 
+        cancelButton={this.cancelButton} 
+        onInputChange={this.onInputChange}
+        onEditUser = {this.onEditUser} />
+     : <div></div> }
      <div>
       <Header />
       <AddNewCustomerButton addNewCustomerButton={this.addNewCustomerButton} />
       <div className="customers-list-wrapper mh5 mt3 br2">
         <UserList 
           customers = {this.state.data} 
+          addNewCustomerButton={this.addNewCustomerButton}
           onStatusChange={this.onStatusChange}
           onDeleteUser = {this.onDeleteUser}
           onEditUser = {this.addNewCustomerButton}
