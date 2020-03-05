@@ -21,11 +21,16 @@ class App extends Component {
         {id: 6, name: 'Zamir', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
         {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' }
       ],
-      route: 'home',
+      route: 'signin',
       newform: {},
       currentIndex: ''
     }
   }
+
+  onRouteChange = (route) => {
+    this.setState({route: route})
+  }
+
  //triggering add new customer form
 addNewCustomerButton = (route, ind) => {
   this.setState({route: route, currentIndex: ind})
@@ -100,6 +105,22 @@ onStatusChange = (ind) => {
 render() {
   return (  
     <div className='App'>
+    {this.state.route === 'signin'
+    ? <SignIn onRouteChange={this.onRouteChange}/>
+    : <div>
+      <Header />
+      <AddNewCustomerButton addNewCustomerButton={this.addNewCustomerButton} />
+      <div className="customers-list-wrapper mh5 mt3 br2">
+        <UserList 
+          customers = {this.state.data} 
+          addNewCustomerButton={this.addNewCustomerButton}
+          onStatusChange={this.onStatusChange}
+          onDeleteUser = {this.onDeleteUser}
+          onEditUser = {this.addNewCustomerButton}
+        />
+        <Pagination /> 
+      </div>
+    </div>}
     {this.state.route === 'newuser'
      ? <AddNewCustomerForm 
         customers = {this.state} 
@@ -114,20 +135,6 @@ render() {
         onInputChange={this.onInputChange}
         onEditUser = {this.onEditUser} />
      : <div></div> }
-     <div>
-      <Header />
-      <AddNewCustomerButton addNewCustomerButton={this.addNewCustomerButton} />
-      <div className="customers-list-wrapper mh5 mt3 br2">
-        <UserList 
-          customers = {this.state.data} 
-          addNewCustomerButton={this.addNewCustomerButton}
-          onStatusChange={this.onStatusChange}
-          onDeleteUser = {this.onDeleteUser}
-          onEditUser = {this.addNewCustomerButton}
-        />
-        <Pagination /> 
-      </div>
-    </div>
     </div>
     )
   }
