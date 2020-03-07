@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
-import UserList from './components/UserList/UserList.js';
-import AddNewCustomerButton from './components/AddNewCustomer/AddNewCustomerButton.js';
-import AddNewCustomerForm from './components/AddNewCustomer/AddNewCustomerForm.js';
-import Pagination from './components/Pagination/Pagination.js';
-import Header from './components/Header/Header.js';
-import SignIn from './components/SignIn/SignIn.js'; 
-import EditCustomerForm from './components/EditCustomer/EditCustomerForm.js'; 
+import UserList from '../components/UserList/UserList.js';
+import AddNewCustomerButton from '../components/AddNewCustomer/AddNewCustomerButton.js';
+import AddNewCustomerForm from '../components/AddNewCustomer/AddNewCustomerForm.js';
+import Pagination from '../components/Pagination/Pagination.js';
+import Header from '../components/Header/Header.js';
+import SignIn from '../components/SignIn/SignIn.js'; 
+import EditCustomerForm from '../components/EditCustomer/EditCustomerForm.js'; 
+
+import { setSearchField } from '../redux/actions.js'; 
+import SearchBox from '../components/SearchBox/SearchBox';
+
+
+const mapStateToProps = (state) => {
+  return { searchField: state.searchUsers.searchField }
+}
+
+// const mapDispatchToProps = dispatch => {
+//   // onSearchChange: (event) => dispatch(setSearchField(event.target.value))  
+// }
 
 class App extends Component {
   constructor() {
@@ -21,10 +34,15 @@ class App extends Component {
         {id: 6, name: 'Zamir', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
         {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' }
       ],
-      route: 'signin',
+      route: 'home',
       newform: {},
-      currentIndex: ''
+      currentIndex: ''  
     }
+  }
+  
+  onSearchChange = (event) => {
+    this.setState({searchField: event.target.value})
+    console.log(this.state)
   }
 
   onRouteChange = (route) => {
@@ -103,6 +121,7 @@ onStatusChange = (ind) => {
 }
 
 render() {
+  // console.log(this.props.store.getState())
   return (  
     <div className='App'>
     {this.state.route === 'signin'
@@ -110,6 +129,9 @@ render() {
     : <div>
       <Header />
       <AddNewCustomerButton addNewCustomerButton={this.addNewCustomerButton} />
+      <SearchBox 
+          onSearchChange={this.onSearchChange}
+      />
       <div className="customers-list-wrapper mh5 mt3 br2">
         <UserList 
           customers = {this.state.data} 
@@ -118,7 +140,9 @@ render() {
           onDeleteUser = {this.onDeleteUser}
           onEditUser = {this.addNewCustomerButton}
         />
-        <Pagination /> 
+        <Pagination 
+        customers = {this.state}
+        /> 
       </div>
     </div>}
     {this.state.route === 'newuser'
@@ -140,4 +164,5 @@ render() {
   }
 }
 
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default App;

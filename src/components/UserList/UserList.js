@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../App.css';
+import '../../containers/App.css';
 
 class UserList extends Component {
 
@@ -39,8 +39,8 @@ render() {
                                 </button>
                             </div>  
                             <div>
-                                <i class="fas fa-pen" onClick={() => this.props.addNewCustomerButton('edituser', ind)}></i>
-                                <i class="fas fa-trash-alt" onClick={() => this.props.onDeleteUser(ind)}></i>
+                                <i className="fas fa-pen" onClick={() => this.props.addNewCustomerButton('edituser', ind)}></i>
+                                <i className="fas fa-trash-alt" onClick={() => this.props.onDeleteUser(ind)}></i>
                             </div>
                         </div>
                         )   

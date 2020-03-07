@@ -5,6 +5,16 @@ body {
 
 .main-button {
   background-color: #37a0f4;
+  width: 300px;
+}
+
+.search-input {
+  width: 150px;
+}
+
+.search-button {
+  background-color: #37a0f4;
+  width: 140px;
 }
 
 .tbody, .thead > div  {
@@ -23,7 +33,7 @@ body {
 
 .tbody > div, .thead > div {
   width: 250px;
-  padding: 20px 0 20px 50px;
+  padding: 15px 0 15px 50px;
   overflow: hidden;
 }
 
