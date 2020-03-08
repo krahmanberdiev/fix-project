@@ -32,11 +32,28 @@ class App extends Component {
         {id: 4, name: 'Tolon', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
         {id: 5, name: 'Kanat', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' },
         {id: 6, name: 'Zamir', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
-        {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' }
+        {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' },
+        {id: 1, name: 'Azamat', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
+        {id: 2, name: 'Kuttubek', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' },
+        {id: 3, name: 'Aibek', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Progress' },
+        {id: 4, name: 'Tolon', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
+        {id: 5, name: 'Kanat', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' },
+        {id: 6, name: 'Zamir', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
+        {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' },
+        {id: 1, name: 'Azamat', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
+        {id: 2, name: 'Kuttubek', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' },
+        {id: 3, name: 'Aibek', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Progress' },
+        {id: 4, name: 'Tolon', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
+        {id: 5, name: 'Kanat', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' },
+        {id: 6, name: 'Zamir', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Active' },
+        {id: 7, name: 'David', phone: '5718894220', zip: '94330', vin: '5346543654641', status: 'Inactive' },
       ],
       route: 'home',
       newform: {},
-      currentIndex: ''  
+      currentIndex: '',
+      start: 0,
+      end: 5,
+      perPageValue: 5  
     }
   }
   
@@ -120,6 +137,33 @@ onStatusChange = (ind) => {
   this.setState({[this.state.data]: theStatus})
 }
 
+onPageChange = (arrow) => {
+  let start = this.state.start;
+  let end = this.state.end;
+  let perPageValue = this.state.perPageValue;
+  const total = this.state.data.length;
+
+  if (arrow === 'right' && end <= total) {
+    start += perPageValue;
+    end += perPageValue;
+  } else if (arrow === 'left' && start >= 0 && end > perPageValue){
+    start -= perPageValue;
+    end -= perPageValue;
+  }
+  this.setState({start: start, end: end})
+}
+
+handlePerPageValue = (event) => {
+  let newValue = Number(event.target.value);
+  console.log(newValue)
+  this.setState({
+    perPageValue: newValue,
+    end: newValue,
+    start: 0
+  })
+}
+
+
 render() {
   // console.log(this.props.store.getState())
   return (  
@@ -134,7 +178,7 @@ render() {
       />
       <div className="customers-list-wrapper mh5 mt3 br2">
         <UserList 
-          customers = {this.state.data} 
+          customers = {this.state} 
           addNewCustomerButton={this.addNewCustomerButton}
           onStatusChange={this.onStatusChange}
           onDeleteUser = {this.onDeleteUser}
@@ -142,6 +186,8 @@ render() {
         />
         <Pagination 
         customers = {this.state}
+        onPageChange={this.onPageChange}
+        handlePerPageValue={this.handlePerPageValue}
         /> 
       </div>
     </div>}

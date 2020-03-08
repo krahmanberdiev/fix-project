@@ -21,6 +21,10 @@ body {
   border-bottom: 1px solid lightgray;
 }
 
+.thead > div::first-letter {
+  text-transform: uppercase;
+}
+
 .tbody:hover {
   background-color: #dadada;
   transition: 0.3s ease-in-out;
@@ -32,10 +36,10 @@ body {
 }
 
 .tbody > div, .thead > div {
-  width: 250px;
+  width: 200px;
   padding: 15px 0 15px 50px;
   overflow: hidden;
-}
+} 
 
 .customers-list-wrapper {
   background-color: #fff;
@@ -48,9 +52,10 @@ body {
 
 .buttons {
   background-color: #37a0f4;
-  padding: 7px 0;
-  width: 100px;
-  border-radius: 3px;
+  font-size: 100%;
+  /* padding: 7px 0;
+  width: 80%;
+  border-radius: 3px; */
   text-align: center;
 }
 
@@ -68,7 +73,7 @@ body {
 }
 
 .fa-pen {
-  margin-right: 40px;
+  margin-right: 40%;
   color:#37a0f4;
 }
 
@@ -77,19 +82,24 @@ body {
   padding: 20px 4%;
   text-align: right;
   font-size: 80%;
-  color: #262626;
+  /* color: #262626; */
 }
 .pag-dropdown {
-  margin: auto 2%;
+  margin: auto 20px auto 2%;
 }
+
 .pag-total {
   margin-right: 2%;
+}
+
+.fa-sort-down:hover, .pag-left:hover, .pag-right:hover {
+  cursor: pointer;
+  color: #808080;
 }
 /* TODO: change its color based 
 on page count start or end */
 .pag-left {
   margin-right: 2%;
-  color: #808080;
 }
 
 /* modal */
@@ -150,6 +160,7 @@ on page count start or end */
   font-weight: normal;
   text-shadow: 0 0 2px gray;
 }
+
 #add {
   padding: 5px 20px;
   box-sizing: border-box;
